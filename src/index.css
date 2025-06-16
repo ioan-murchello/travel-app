@@ -1,0 +1,170 @@
+@import "https://unpkg.com/leaflet@1.9.3/dist/leaflet.css";
+@import "https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap";
+
+/* These CSS variables are global, so they are available in all CSS modules */
+:root {
+  --color-brand--1: #ffb545;
+  --color-brand--2: #00c46a;
+  --color-brand--3: #2dac71;
+
+  --color-dark--0: #242a2e;
+  --color-dark--1: #2d3439;
+  --color-dark--2: #42484d;
+  --color-light--1: #aaa;
+  --color-light--2: #ececec;
+  --color-light--3: #d6dee0;
+
+  --color-yellow--3: #f9ff44;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  color: var(--color-light--2);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+label {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  padding: 0.8rem 1.2rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-light--3);
+  transition: all 0.2s;
+}
+
+input:focus {
+  outline: none;
+  background-color: #fff;
+}
+
+.cta,
+.cta:visited {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-dark--1);
+  color: var(--color-brand--2);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 0.6rem 3rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  transition: color 0.3s ease-in-out;
+  -webkit-transition: color 0.3s ease-in-out;
+  -moz-transition: color 0.3s ease-in-out;
+  -ms-transition: color 0.3s ease-in-out;
+  -o-transition: color 0.3s ease-in-out;
+  &:hover {
+    color: var(--color-brand--1);
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-user-icon {
+  position: relative;
+}
+
+.marker-pin {
+  width: 25px;
+  height: 25px;
+  background-color: #4285f4;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  box-shadow: 0 0 0 2px white;
+  z-index: 10;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+.marker-pin::after {
+  content: "";
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  background: white;
+  position: absolute;
+  border-radius: 50%;
+  top: 28%;
+  left: 33%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  -moz-transform: translate(-50%, -50%) rotate(45deg);
+  -ms-transform: translate(-50%, -50%) rotate(45deg);
+  -o-transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.pulse-ring {
+  width: 20px;
+  height: 20px;
+  background: rgba(66, 134, 244, 0.548);
+  border-radius: 50%;
+  position: absolute;
+  top: 31px;
+  left: 7px;
+  transform: rotate(-45deg);
+  animation: pulse 2s infinite;
+  z-index: 1;
+  -webkit-animation: pulse 2s infinite;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1) rotate(-45deg);
+    opacity: 0.7;
+    -webkit-transform: scale(1) rotate(-45deg);
+    -moz-transform: scale(1) rotate(-45deg);
+    -ms-transform: scale(1) rotate(-45deg);
+    -o-transform: scale(1) rotate(-45deg);
+}
+  100% {
+    transform: scale(2.5) rotate(-45deg);
+    opacity: 0;
+    -webkit-transform: scale(2.5) rotate(-45deg);
+    -moz-transform: scale(2.5) rotate(-45deg);
+    -ms-transform: scale(2.5) rotate(-45deg);
+    -o-transform: scale(2.5) rotate(-45deg);
+}
+}
