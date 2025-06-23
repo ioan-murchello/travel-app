@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { formatDate } from "../helpers/helpers";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import styled from "styled-components";
 import { useCTX } from "../context/CitiesContext";
@@ -44,7 +44,7 @@ const StyledInputWrapper = styled.div`
 function Form() {
   const navigate = useNavigate();
   const { newCity, setCities, setNewCity } = useCTX();
-
+  const [created, setCreated] = useState(false);
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
@@ -57,7 +57,6 @@ function Form() {
   useEffect(
     function () {
       if (!newCity.lat && !newCity.lng) return;
-
       async function fetchCityData() {
         try {
           setIsLoadingGeocoding(true);
@@ -73,7 +72,6 @@ function Form() {
             throw new Error(
               "That doesn't seem to be a city. Click somewhere else 😉"
             );
-
           setCityName(
             data.address.city ||
               data.address.town ||
@@ -97,7 +95,6 @@ function Form() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     if (!newCity || !date) return;
 
     const newCityFromMap = {
@@ -111,7 +108,7 @@ function Form() {
       lat: newCity.lat,
       lng: newCity.lng,
     };
-
+    if (!created) return;
     await setCities((prev) => [...prev, newCityFromMap]);
     navigate("/map/cities");
 
@@ -154,8 +151,16 @@ function Form() {
       </StyledInputWrapper>
 
       <StyledInputWrapper $type="inp">
-        <Button type="primary">Add</Button>
-        <Button type="back" onClick={() => navigate(-1)}>
+        <Button type="submit" typeOfBtn="primary" onClick={() => setCreated(true)}>
+          Add
+        </Button>
+        <Button
+          typeOfBtn="back"
+          onClick={() => {
+            setCreated(false);
+            navigate(-1);
+          }}
+        >
           &larr; back
         </Button>
       </StyledInputWrapper>

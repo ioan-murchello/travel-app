@@ -9,6 +9,10 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const Ul = styled.ul`
@@ -16,6 +20,9 @@ const Ul = styled.ul`
   display: flex;
   align-items: center;
   gap: 4rem;
+  @media (max-width: 600px) {
+      gap: 2.5rem;
+  }
 `;
 
 const Li = styled.li`
@@ -37,6 +44,12 @@ const Li = styled.li`
     color: var(--color-light--2);
     text-decoration: none;
   }
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 `;
 
 const links = [
@@ -55,19 +68,14 @@ const PageNav = () => {
         {links.map((link) => (
           <Li key={link.name}>
             <NavLink
-              className={link.name === "Map" ? "cta" : ""}
-              style={({ isActive }) =>
-                isActive ? { fontWeight: "bold" } : undefined
+              className={({ isActive }) =>
+                `${isActive ? "activeLink" : ""} ${
+                  link.name === "Map" ? "cta" : ""
+                }`
               }
               to={link.url}
             >
-              {link.name === "Map" ? (
-                <LiaMapMarkedAltSolid
-                  style={{ width: "4rem", height: "4rem" }}
-                />
-              ) : (
-                link.name
-              )}
+              {link.name === "Map" ? <LiaMapMarkedAltSolid /> : link.name}
             </NavLink>
           </Li>
         ))}

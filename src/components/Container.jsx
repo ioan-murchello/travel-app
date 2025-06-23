@@ -6,10 +6,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   max-width: 946px;
   width: 100%;
+  padding: 0 15px;
 `;
 
-const Contaienr = ({ children }) => {
+const Container = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 
-export default Contaienr;
+export default Container;

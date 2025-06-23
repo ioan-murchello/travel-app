@@ -8,7 +8,7 @@ const StyledHeader = styled.header`
   height: 5rem;
   padding: 0 2rem;
   color: var(--color-light--2);
-  margin: 30px; 
+  margin: 30px;
 
   ${({ $pos }) =>
     $pos === "pos"
@@ -18,19 +18,23 @@ const StyledHeader = styled.header`
           left: 0;
           z-index: 1000;
           width: 100%;
-          background-color: #4c4c4c61; 
+          background-color: #4c4c4c61;
           margin: 0;
           padding: 6px 2rem;
           height: auto;
           backdrop-filter: blur(3px);
-
         `
       : css`
           position: static;
         `}
-`; 
 
-const Header = ({pos}) => {
+        @media (max-width: 600px){
+          margin: 0;
+          padding: 15px;
+        }
+`;
+
+const Header = ({ pos }) => {
   return (
     <StyledHeader $pos={pos}>
       <PageNav />

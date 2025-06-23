@@ -11,7 +11,7 @@ const Pricing = () => {
       <Header />
       <Section>
         <Container>
-          <H1>Simple, Transparent Pricing</H1>
+          <H1>Transparent Pricing</H1>
           <H2>Choose the plan that fits your travel style</H2>
           <br />
           <P>

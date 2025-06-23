@@ -1,5 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import styled from "styled-components"; 
+import styled from "styled-components";
+import { TbSquareRoundedArrowUpFilled } from "react-icons/tb";
+import { TbSquareRoundedArrowDownFilled } from "react-icons/tb";
+import { useState } from "react";
+import Button from "./Button";
 
 const StyledAside = styled.aside`
   width: 100%;
@@ -13,6 +17,17 @@ const StyledAside = styled.aside`
   color: var(--color-white--1);
   font-size: 1.2rem;
   padding: 5rem 1rem;
+  transition: all 0.5s ease-in;
+
+  @media (max-width: 600px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: ${(props) =>
+      props.$show ? "translateY(13%)" : "translateY(92%)"};
+    padding: 2rem 1rem;
+    z-index: 500;
+  }
 `;
 
 const BtnWrapper = styled.div`
@@ -22,6 +37,10 @@ const BtnWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 7rem 0 0 0;
+
+  @media (max-width: 600px) {
+    padding: 0;
+  }
 `;
 
 const StyledBtn = styled(Link)`
@@ -36,15 +55,28 @@ const StyledBtn = styled(Link)`
   border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
-
-  
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 `;
 const Asside = ({ children }) => {
+  const [showAsside, setShowAsside] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
- 
+
   return (
-    <StyledAside> 
+    <StyledAside $show={showAsside}>
+      {showAsside ? (
+        <TbSquareRoundedArrowDownFilled
+          style={{ color: "var(--color-brand--1)" }}
+          onClick={() => setShowAsside((prev) => !prev)}
+        />
+      ) : (
+        <TbSquareRoundedArrowUpFilled
+          style={{ color: "var(--color-brand--1)" }}
+          onClick={() => setShowAsside((prev) => !prev)}
+        />
+      )}
       <BtnWrapper>
         <StyledBtn to="/map/cities" $active={currentPath === "/map/cities"}>
           Cities

@@ -16,18 +16,19 @@ import {
   ZoomControl,
 } from "react-leaflet";
 import { convertToEmoji } from "../components/Form";
-import StyledPopup from "../components/StyledPopup"; 
+import StyledPopup from "../components/StyledPopup";
 
-import L from "leaflet"; 
+import L from "leaflet";
 
-export const userIcon = L.divIcon({
-  className: "custom-user-icon",
+const customHtmlIcon = L.divIcon({
+  className: "my-custom-marker",
   html: `<div class="marker-pin"></div><div class="pulse-ring"></div>`,
   iconSize: [30, 42],
   iconAnchor: [15, 42],
 });
 
 const StyledMap = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1.3fr;
   width: 100%;
@@ -36,6 +37,10 @@ const StyledMap = styled.div`
   justify-content: center;
   text-align: center;
   background-color: gray;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    overflow: hidden;
+  }
 `;
 
 const StyledMain = styled.main`
@@ -55,9 +60,6 @@ function MapUpdater({ center }) {
 }
 
 const Map = () => {
-  const { cities,newCity, setNewCity } = useCTX(); 
-  const navigate = useNavigate();
-
   const [searchParams] = useSearchParams();
 
   const latidute = parseFloat(searchParams.get("lat"));
@@ -68,8 +70,13 @@ const Map = () => {
       ? [latidute, longitude]
       : [48.8566, 2.3522];
 
+  const { cities, setNewCity } = useCTX();
   const [position, setPosition] = useState(initialPosition);
+  const isInCities = cities?.some(
+    (city) => city.lat === position[0] && city.lng === position[1]
+  );
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (latidute !== null && longitude !== null) {
       setPosition([latidute, longitude]);
@@ -80,14 +87,12 @@ const Map = () => {
     useMapEvents({
       click: async (e) => {
         const { lat, lng } = e.latlng;
-
+        if (position[0] === lat && position[1] === lng) return;
         setPosition([lat, lng]);
-
         const res = await fetch(
           `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
         );
         const data = await res.json();
-
         const locationInfo = {
           lat,
           lng,
@@ -137,11 +142,17 @@ const Map = () => {
             onClick={(locInfo) => {
               setPosition([locInfo.lat, locInfo.lng]);
             }}
-          /> 
+          />
+
+          {!isInCities && position[0] && position[1] && (
+            <Marker position={position} icon={customHtmlIcon}>
+              <Popup>Selected Location</Popup>
+            </Marker>
+          )}
 
           {cities?.map((el) => {
             return (
-              <Marker key={el.cityName} position={[el.lat, el.lng]}>
+              <Marker key={el.id} position={[el.lat, el.lng]}>
                 <Popup>
                   <StyledPopup city={el} />
                 </Popup>

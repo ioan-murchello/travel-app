@@ -13,7 +13,7 @@ export const getRandomDateString = () => {
     start.getTime() + Math.random() * (end.getTime() - start.getTime())
   );
 
-  return formatDate(randomDate.toString()); // Full string with weekday, time, timezone
+  return formatDate(randomDate.toString()); // Full string with weekday, time
 };
 
 const iniialCities = [

@@ -102,7 +102,7 @@ function City() {
         </Link>
       </Section>
 
-      <Button type="back" onClick={() => navigate(-1)}>
+      <Button typeOfBtn="back" onClick={() => navigate(-1)}>
         &larr; Back
       </Button>
     </Container>

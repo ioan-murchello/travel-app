@@ -24,9 +24,9 @@ const StyledButton = styled.button`
   font-size: 1.4rem;
 `;
 
-const Button = ({ children, onClick, type }) => {
+const Button = ({ children, onClick, typeOfBtn }) => {
   return (
-    <StyledButton onClick={onClick} $typeBtn={type}>
+    <StyledButton onClick={onClick} $typeBtn={typeOfBtn}>
       {children}
     </StyledButton>
   );
