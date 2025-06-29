@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const StyledAside = styled.aside`
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   background-color: var(--color-dark--1);
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@ const StyledAside = styled.aside`
     bottom: 0;
     left: 0;
     transform: ${(props) =>
-      props.$show ? "translateY(13%)" : "translateY(92vh)"};
+      props.$show ? "translateY(13%)" : "translateY(91lvh)"};
     padding: 1rem 1rem;
     z-index: ${(props) => (props.$show ? 1200 : 1000)};
   }
