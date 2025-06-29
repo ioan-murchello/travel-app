@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Section from "../components/Section";
 import Asside from "../components/Asside";
 import Header from "../components/Header";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
@@ -19,6 +18,8 @@ import { convertToEmoji } from "../components/Form";
 import StyledPopup from "../components/StyledPopup";
 
 import L from "leaflet";
+import Article from "../components/Article";
+import { MdTry } from "react-icons/md";
 
 const customHtmlIcon = L.divIcon({
   className: "my-custom-marker",
@@ -30,14 +31,14 @@ const customHtmlIcon = L.divIcon({
 const StyledMap = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1.3fr;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   min-height: 100%;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: gray;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
     overflow: hidden;
   }
@@ -86,13 +87,21 @@ const Map = () => {
   function ClickHandler({ onClick }) {
     useMapEvents({
       click: async (e) => {
+        console.log(e, "click event on map");
+
         const { lat, lng } = e.latlng;
-        if (position[0] === lat && position[1] === lng) return;
         setPosition([lat, lng]);
+
         const res = await fetch(
           `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
         );
+        console.log(res, "ressponse from reverse geocoding");
+        if (!res.ok) {
+          alert("Failed to fetch location data. Please try again later.");
+          throw new Error("Failed to fetch location data");
+        }
         const data = await res.json();
+        if (!data) return;
         const locationInfo = {
           lat,
           lng,
@@ -119,9 +128,9 @@ const Map = () => {
     <StyledMap>
       <Header pos="pos" />
       <Asside>
-        <Section>
+        <Article>
           <Outlet />
-        </Section>
+        </Article>
       </Asside>
       <StyledMain>
         <MapContainer
@@ -130,7 +139,9 @@ const Map = () => {
           zoom={10}
           scrollWheelZoom={false}
           zoomControl={false}
-          onClick={() => navigate("/map/form")}
+          onClick={() => {
+            navigate("/map/form");
+          }}
         >
           <MapUpdater center={position} />
           <TileLayer

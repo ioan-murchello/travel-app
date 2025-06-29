@@ -187,7 +187,14 @@ svg {
   }
 }
 
-.activeLink{
+aside svg {
+  @media (max-width: 768px) {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.activeLink {
   font-weight: bold;
   color: var(--color-brand--1) !important;
 }

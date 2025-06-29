@@ -31,6 +31,7 @@ const StyledHeader = styled.header`
         @media (max-width: 600px){
           margin: 0;
           padding: 15px;
+          height: auto;
         }
 `;
 

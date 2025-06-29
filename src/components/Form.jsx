@@ -57,6 +57,7 @@ function Form() {
   useEffect(
     function () {
       if (!newCity.lat && !newCity.lng) return;
+
       async function fetchCityData() {
         try {
           setIsLoadingGeocoding(true);
@@ -92,6 +93,11 @@ function Form() {
     },
     [newCity.lat, newCity.lng, newCity]
   );
+  useEffect(() => {
+    if (geocodingError) {
+      alert(`Error: ${geocodingError}. Some problem with server.`);
+    }
+  }, [geocodingError]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -120,7 +126,7 @@ function Form() {
   if (!newCity.lat && !newCity.lng)
     return <p>"Start by clicking somewhere on the map" </p>;
 
-  if (geocodingError) return <p>{geocodingError}</p>;
+   
 
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -151,7 +157,11 @@ function Form() {
       </StyledInputWrapper>
 
       <StyledInputWrapper $type="inp">
-        <Button type="submit" typeOfBtn="primary" onClick={() => setCreated(true)}>
+        <Button
+          type="submit"
+          typeOfBtn="primary"
+          onClick={() => setCreated(true)}
+        >
           Add
         </Button>
         <Button

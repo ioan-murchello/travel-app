@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSection = styled.section`
+const StyledArticle = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,8 +10,8 @@ const StyledSection = styled.section`
   width: 100%;
 `;
 
-const Section = ({ children }) => {
-  return <StyledSection>{children}</StyledSection>;
+const Article = ({ children }) => {
+  return <StyledArticle>{children}</StyledArticle>;
 };
 
-export default Section;
+export default Article;

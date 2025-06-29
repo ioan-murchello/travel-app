@@ -1,15 +1,15 @@
 import MainWrapper from "../components/MainWrapper";
 import productImg from "../assets/img-2.jpg";
 import Header from "../components/Header";
-import Section from "../components/Section";
 import { H1, H2, P } from "../components/Heading";
 import Contaienr from "../components/Container";
+import Article from "../components/Article";
 
 const Product = () => {
   return (
     <MainWrapper img={productImg}>
       <Header />
-      <Section>
+      <Article>
         <Contaienr>
           <H1>WorldWise</H1>
           <H2>Track Your Adventures Around the Globe</H2>
@@ -41,7 +41,7 @@ const Product = () => {
             tells a story only you can tell.
           </P>
         </Contaienr>
-      </Section>
+      </Article>
     </MainWrapper>
   );
 };

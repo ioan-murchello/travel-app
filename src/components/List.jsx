@@ -5,7 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { useState } from "react";
 
 const StyledUl = styled.ul`
-  width: 90%;
+  width: 100%;
   height: 65vh;
   list-style: none;
   overflow-y: scroll;
@@ -15,14 +15,12 @@ const StyledUl = styled.ul`
 
   align-content: start;
   gap: 1.6rem;
-  padding: 2rem;
 
   ${({ $modified }) =>
     $modified &&
     css`
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2.6rem;
     `}
 `;
 
@@ -37,31 +35,24 @@ const StyledLi = styled.li`
   background: #ff960d;
   background: linear-gradient(
     90deg,
-    rgba(255, 150, 13, 1) 0%,
+    #5f513e 0%,
     rgba(87, 199, 133, 1) 59%,
     rgba(31, 110, 78, 1) 100%
   );
   border-radius: 6px;
-  box-shadow: 0 0 4px 10px rgb(76, 76, 76);
 
   ${({ $modified }) =>
     $modified
       ? css`
-          background: #8db340;
-          background: linear-gradient(
-            90deg,
-            rgba(31, 110, 78, 1) 0%,
-            rgba(87, 199, 133, 1) 59%,
-            rgba(255, 150, 13, 1) 100%
-          );
+          background: #2770c6b3;
         `
       : css`
           border-left: 5px solid var(--color-brand--2);
           background: #ff960d;
           background: linear-gradient(
             90deg,
-            rgba(255, 150, 13, 1) 0%,
-            rgba(87, 199, 133, 1) 59%,
+            #312f2d 0%,
+            #4d9c6e 59%,
             rgba(31, 110, 78, 1) 100%
           );
         `}
@@ -75,7 +66,12 @@ const CityCard = styled.div`
   padding: 1rem;
   text-align: center;
   cursor: pointer;
+  @media (max-width: 600px) {
+    grid-template-columns: auto;
+    gap: 0.5rem;
+  }
 `;
+
 const CountryCard = styled.div`
   display: grid;
   align-items: center;
@@ -95,6 +91,9 @@ const Flag = styled.span`
 const CityName = styled.h3`
   font-size: 1.8rem;
   color: #ffffff;
+  @media (max-width: 600px) {
+    font-size: 1.4em;
+  }
 `;
 
 const CountryName = styled.h3`

@@ -1,15 +1,15 @@
 import Header from "../components/Header";
 import MainWrapper from "../components/MainWrapper";
-import Section from "../components/Section";
 import pricingImg from "../assets/img-1.jpg";
 import { H1, H2, P } from "../components/Heading";
 import Container from "../components/Container";
+import Article from "../components/Article";
 
 const Pricing = () => {
   return (
     <MainWrapper img={pricingImg}>
       <Header />
-      <Section>
+      <Article>
         <Container>
           <H1>Transparent Pricing</H1>
           <H2>Choose the plan that fits your travel style</H2>
@@ -37,7 +37,7 @@ const Pricing = () => {
             support
           </P>
         </Container>
-      </Section>
+      </Article>
     </MainWrapper>
   );
 };
