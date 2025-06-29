@@ -23,7 +23,7 @@ const StyledAside = styled.aside`
     bottom: 0;
     left: 0;
     transform: ${(props) =>
-      props.$show ? "translateY(13%)" : "translateY(94%)"};
+      props.$show ? "translateY(13%)" : "translateY(92vh)"};
     padding: 1rem 1rem;
     z-index: ${(props) => (props.$show ? 1200 : 1000)};
   }
