@@ -8,7 +8,7 @@ const StyledMainWrapper = styled.div`
     url(${({ $img }) => $img});
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 100dvh;
 `;
 
 const MainWrapper = ({ img, children }) => {
