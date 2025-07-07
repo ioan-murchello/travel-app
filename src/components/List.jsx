@@ -12,15 +12,18 @@ const StyledUl = styled.ul`
   overflow-x: hidden;
   display: grid;
   grid-template-columns: 1fr;
-
   align-content: start;
   gap: 1.6rem;
+  padding: 1.5rem;
 
   ${({ $modified }) =>
     $modified &&
     css`
       display: grid;
       grid-template-columns: 1fr 1fr;
+      @media (max-width: 768px){
+        grid-template-columns: auto;
+      }
     `}
 `;
 

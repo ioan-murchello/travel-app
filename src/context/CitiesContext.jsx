@@ -33,6 +33,7 @@ const iniialCities = [
 const CountriesAndCitiesContext = createContext();
 
 const CountriesAndCitiesProvider = ({ children }) => {
+  const [showCities, setShowCities] = useState(false);
   const [cities, setCities] = useState(() => {
     const fromLocalStorage = getDataFromLoacleStorage("cities");
     return fromLocalStorage.length > 0 ? fromLocalStorage : iniialCities;
@@ -72,6 +73,8 @@ const CountriesAndCitiesProvider = ({ children }) => {
         setNewCity,
         setCities,
         removeCity,
+        showCities,
+        setShowCities,
       }}
     >
       {children}

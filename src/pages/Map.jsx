@@ -19,7 +19,6 @@ import StyledPopup from "../components/StyledPopup";
 
 import L from "leaflet";
 import Article from "../components/Article";
-import { MdTry } from "react-icons/md";
 
 const customHtmlIcon = L.divIcon({
   className: "my-custom-marker",
@@ -61,6 +60,7 @@ function MapUpdater({ center }) {
 }
 
 const Map = () => {
+  const { cities, setNewCity, setShowCities } = useCTX();
   const [searchParams] = useSearchParams();
 
   const latidute = parseFloat(searchParams.get("lat"));
@@ -71,7 +71,6 @@ const Map = () => {
       ? [latidute, longitude]
       : [48.8566, 2.3522];
 
-  const { cities, setNewCity } = useCTX();
   const [position, setPosition] = useState(initialPosition);
   const isInCities = cities?.some(
     (city) => city.lat === position[0] && city.lng === position[1]
@@ -87,8 +86,6 @@ const Map = () => {
   function ClickHandler({ onClick }) {
     useMapEvents({
       click: async (e) => {
-        console.log(e, "click event on map");
-
         const { lat, lng } = e.latlng;
         setPosition([lat, lng]);
 
@@ -118,6 +115,7 @@ const Map = () => {
 
         onClick(locationInfo);
         setNewCity(locationInfo);
+        setShowCities(true);
         navigate("/map/form");
       },
     });

@@ -16,10 +16,12 @@ const StyledHeader = styled.header`
           position: fixed;
           top: 0;
           left: 0;
+          right: 0;
           z-index: 1000;
           width: 100%;
+          max-width: 1520px;
           background-color: #4c4c4c61;
-          margin: 0;
+          margin: 0 auto;
           padding: 6px 2rem;
           height: auto;
           backdrop-filter: blur(3px);
@@ -28,11 +30,11 @@ const StyledHeader = styled.header`
           position: static;
         `}
 
-        @media (max-width: 600px){
-          margin: 0;
-          padding: 15px;
-          height: auto;
-        }
+  @media (max-width: 600px) {
+    margin: 0;
+    padding: 15px;
+    height: auto;
+  }
 `;
 
 const Header = ({ pos }) => {

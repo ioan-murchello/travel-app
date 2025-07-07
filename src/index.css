@@ -194,6 +194,13 @@ aside svg {
   }
 }
 
+form svg {
+  @media (max-width: 768px) {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
 .activeLink {
   font-weight: bold;
   color: var(--color-brand--1) !important;

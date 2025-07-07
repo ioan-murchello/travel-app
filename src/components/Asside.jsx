@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { TbSquareRoundedArrowUpFilled } from "react-icons/tb";
 import { TbSquareRoundedArrowDownFilled } from "react-icons/tb";
 import { useEffect, useState } from "react";
+import { useCTX } from "../context/CitiesContext";
 
 const StyledAside = styled.aside`
   width: 100%;
@@ -15,7 +16,7 @@ const StyledAside = styled.aside`
   gap: 3rem;
   color: var(--color-white--1);
   font-size: 1.2rem;
-  padding: 5rem 1rem;
+  padding: 5rem 0;
   transition: all 0.7s ease-in;
 
   @media (max-width: 768px) {
@@ -23,8 +24,8 @@ const StyledAside = styled.aside`
     bottom: 0;
     left: 0;
     transform: ${(props) =>
-      props.$show ? "translateY(13%)" : "translateY(91lvh)"};
-    padding: 1rem 1rem;
+      props.$show ? "translateY(12%)" : "translateY(100%)"};
+    padding: 1rem 0;
     z-index: ${(props) => (props.$show ? 1200 : 1000)};
   }
 `;
@@ -39,6 +40,22 @@ const BtnWrapper = styled.div`
 
   @media (max-width: 768px) {
     padding: 0;
+  }
+`;
+
+const ShowAsideBtn = styled.div`
+  position: relative;
+  top: ${(props) => (props.$show ? 0 : "-70px")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; 
+  width: 100%; 
+  background-color: var(--color-dark--1);
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
 
@@ -59,46 +76,34 @@ const StyledBtn = styled(Link)`
   }
 `;
 const Asside = ({ children }) => {
+  const { showCities, setShowCities } = useCTX();
+  console.log(showCities, "showCities in Asside");
   const [showAsside, setShowAsside] = useState(false);
-  const [hideAsside, setHideAsside] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setShowAsside(false) 
-        setHideAsside(true);
-      } else {
-        setShowAsside(false)
-        setHideAsside(false);
-      }
-    };
+    // Set state only on initial mount, based on window size
+    const mobileView = window.innerWidth <= 768;
+    setShowCities(mobileView);
+  }, [setShowCities]);
 
-    handleResize(); // Set initial state based on window size
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   return (
-    <StyledAside $show={showAsside}>
-      {hideAsside && (
-        <div>
-          {showAsside ? (
-            <TbSquareRoundedArrowDownFilled
-              style={{ color: "var(--color-brand--1)" }}
-              onClick={() => setShowAsside((prev) => !prev)}
-            />
-          ) : (
-            <TbSquareRoundedArrowUpFilled
-              style={{ color: "var(--color-brand--1)" }}
-              onClick={() => setShowAsside((prev) => !prev)}
-            />
-          )}
-        </div>
-      )}
+    <StyledAside $show={showCities}>
+      <ShowAsideBtn $show={showCities}>
+        {showCities ? (
+          <TbSquareRoundedArrowDownFilled
+            style={{ color: "var(--color-brand--1)" }}
+            onClick={() => setShowCities((prev) => !prev)}
+          />
+        ) : (
+          <TbSquareRoundedArrowUpFilled
+            style={{ color: "var(--color-brand--1)" }}
+            onClick={() => setShowCities((prev) => !prev)}
+          />
+        )}
+      </ShowAsideBtn>
+
       <BtnWrapper>
         <StyledBtn to="/map/cities" $active={currentPath === "/map/cities"}>
           Cities
@@ -111,6 +116,7 @@ const Asside = ({ children }) => {
           Countries
         </StyledBtn>
       </BtnWrapper>
+
       {children}
     </StyledAside>
   );

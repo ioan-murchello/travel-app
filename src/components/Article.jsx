@@ -8,6 +8,7 @@ const StyledArticle = styled.article`
   gap: 2.5rem;
   text-align: center;
   width: 100%;
+  padding: 1rem;
 `;
 
 const Article = ({ children }) => {
