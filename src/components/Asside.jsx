@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { TbSquareRoundedArrowUpFilled } from "react-icons/tb";
 import { TbSquareRoundedArrowDownFilled } from "react-icons/tb";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useCTX } from "../context/CitiesContext";
 
 const StyledAside = styled.aside`
@@ -49,8 +49,8 @@ const ShowAsideBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer; 
-  width: 100%; 
+  cursor: pointer;
+  width: 100%;
   background-color: var(--color-dark--1);
   padding: 1rem;
   transition: all 0.3s ease-in-out;
@@ -77,8 +77,6 @@ const StyledBtn = styled(Link)`
 `;
 const Asside = ({ children }) => {
   const { showCities, setShowCities } = useCTX();
-  console.log(showCities, "showCities in Asside");
-  const [showAsside, setShowAsside] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
 
